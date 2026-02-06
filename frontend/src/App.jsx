@@ -4,6 +4,7 @@ import Chart from './components/Chart';
 import DataTable from './components/DataTable';
 import ControlPanel from './components/ControlPanel';
 import SpectrumChart from './components/SpectrumChart';
+import FirmwareUploader from './components/FirmwareUploader';
 
 export default function App() {
   const [isConnected, setIsConnected] = useState(false);
@@ -32,7 +33,7 @@ export default function App() {
 
   useEffect(() => {
     serialRef.current = new SerialConnection();
-    
+
     // Try to auto-reconnect to previously connected port
     const tryAutoReconnect = async () => {
       const savedPortInfo = SerialConnection.getSavedPortInfo();
@@ -49,7 +50,7 @@ export default function App() {
         const matchingPort = ports.find(port => {
           const info = port.getInfo();
           return info.usbVendorId === savedPortInfo.vendorId &&
-                 info.usbProductId === savedPortInfo.productId;
+            info.usbProductId === savedPortInfo.productId;
         });
 
         if (matchingPort) {
@@ -113,32 +114,32 @@ export default function App() {
       console.log('Arduino status:', newData.status);
       return;
     }
-    
+
     if (newData.error) {
       // Error message from Arduino
       console.error('Arduino error:', newData.error);
       setError(`Sensor: ${newData.error}`);
       return;
     }
-    
+
     // Must have channels property to be valid sensor data
     if (!newData.channels) {
       return;
     }
-    
+
     setData(newData);
 
     if (newData.channels) {
       // Always keep last 60 samples (rolling/cycling buffer)
       const maxPoints = 60;
-      
+
       // Add new sample to each channel and trim if needed
       Object.keys(newData.channels).forEach(channel => {
         if (!dataBufferRef.current[channel]) {
           dataBufferRef.current[channel] = [];
         }
         dataBufferRef.current[channel].push(newData.channels[channel]);
-        
+
         // Remove oldest sample if buffer exceeds maxPoints
         if (dataBufferRef.current[channel].length > maxPoints) {
           dataBufferRef.current[channel].shift();
@@ -201,7 +202,7 @@ export default function App() {
 
   const handleSampleRateChange = (rate) => {
     setSampleRate(rate);
-    
+
     // Send sample rate command to Arduino
     if (serialRef.current?.port?.writable) {
       const command = `RATE:${rate}\n`;
@@ -209,7 +210,7 @@ export default function App() {
       writer.write(new TextEncoder().encode(command));
       writer.releaseLock();
     }
-    
+
     // Clear data buffers to start fresh with new sample rate
     dataBufferRef.current = {
       '410nm': [],
@@ -243,11 +244,10 @@ export default function App() {
             <div className={`w-3 h-3 rounded-full ${isConnected ? 'bg-green-500' : 'bg-red-500'}`}></div>
             <button
               onClick={isConnected ? handleDisconnect : handleConnect}
-              className={`px-6 py-2 rounded-lg font-semibold transition-colors whitespace-nowrap ${
-                isConnected
+              className={`px-6 py-2 rounded-lg font-semibold transition-colors whitespace-nowrap ${isConnected
                   ? 'bg-red-600 hover:bg-red-700 text-white'
                   : 'bg-blue-600 hover:bg-blue-700 text-white'
-              }`}
+                }`}
             >
               {isConnected ? 'Disconnect' : 'Connect'}
             </button>
@@ -264,8 +264,8 @@ export default function App() {
         {isConnected && (
           <>
             {/* Control Panel */}
-            <ControlPanel 
-              onSendCommand={sendLEDCommand} 
+            <ControlPanel
+              onSendCommand={sendLEDCommand}
               onSampleRateChange={handleSampleRateChange}
             />
 
@@ -296,6 +296,9 @@ export default function App() {
         {!isConnected && (
           <div className="text-center py-12">
             <p className="text-gray-400 mb-4">Click "Connect to Serial" to start</p>
+            <div className="max-w-md mx-auto mt-8">
+              <FirmwareUploader />
+            </div>
           </div>
         )}
       </div>
