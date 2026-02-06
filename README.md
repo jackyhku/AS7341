@@ -13,6 +13,7 @@ Real-time visualization system for the AS7341 11-channel multispectral color sen
 - **Auto-Reconnect**: Remembers last connected COM port and automatically reconnects on page reload
 - **Hardware-Level Noise Reduction**: 5x internal oversampling on Arduino for stable readings
 - **LED Control**: Toggle AS7341 onboard LED directly from the web interface
+- **Web Firmware Flasher**: Flash Arduino firmware directly from the browser (no external tools required)
 - **Modern UI**: Clean, dark-themed interface built with React and TailwindCSS
 
 ### Arduino Firmware
@@ -40,11 +41,19 @@ Real-time visualization system for the AS7341 11-channel multispectral color sen
 ### Web Application
 - Node.js 16+ and npm
 - Modern web browser with Web Serial API support (Chrome, Edge, Opera)
+- **Firmware Flashing**: Requires a browser that supports WebUSB (Chrome, Edge)
 
 ## 🚀 Installation
 
 ### 1. Arduino Firmware Setup
 
+**Method 1: Direct Web Flashing (Recommended)**
+1. Connect your Arduino Mega to your computer via USB.
+2. Ensure no other applications (like Arduino IDE or Serial Monitor) are using the port.
+3. Open the web application (see Web Application Setup below).
+4. Use the "Firmware Update" section to flash the latest bundled firmware directly to your board.
+
+**Method 2: Manual PlatformIO Upload**
 ```bash
 # Navigate to Arduino project
 cd arduino
@@ -88,6 +97,10 @@ The application will be available at `http://localhost:5173`
 6. **Adjust Settings**:
    - Change sample rate using the dropdown (0.25 Hz - 8 Hz)
    - Toggle LED on/off using the control buttons
+7. **Update Firmware (if needed)**:
+   - If you need to update the firmware, locate the "Firmware Update" box.
+   - Ensure the "Connect" button at the top is **disconnected**.
+   - Click "Update Firmware" and follow the instructions.
 
 ### Auto-Reconnect Feature
 After the first successful connection, the web app remembers your device. Simply refresh the page and it will automatically reconnect to the same COM port.
@@ -195,6 +208,7 @@ Your app will be live at `https://your-project.vercel.app`
 - **Frontend**: React 18, Vite, TailwindCSS
 - **Visualization**: Chart.js
 - **Communication**: Web Serial API
+- **Firmware Flashing**: avrgirl-arduino (WebUSB)
 - **Firmware**: Arduino C++, Adafruit AS7341 library
 
 ## 🔍 Troubleshooting
@@ -208,6 +222,11 @@ Your app will be live at `https://your-project.vercel.app`
 - Verify correct COM port selected
 - Ensure no other application is using the serial port
 - Try manual disconnect/reconnect
+
+**Firmware update fails:**
+- Ensure the main "Connect" button is set to **Disconnected** (Serial port cannot be open while flashing).
+- Use a WebUSB-compatible browser (Chrome/Edge).
+- Check USB cable connections.
 
 **Sensor reads as all zeros:**
 - Check I2C connections (SDA, SCL, power, ground)
