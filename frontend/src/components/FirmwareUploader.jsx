@@ -4,28 +4,23 @@ import AvrgirlArduino from 'avrgirl-arduino';
 const FirmwareUploader = () => {
     const [status, setStatus] = useState('idle'); // idle, flashing, success, error
     const [message, setMessage] = useState('');
-    const [file, setFile] = useState(null);
     const [progress, setProgress] = useState(0);
 
-    const handleFileChange = (e) => {
-        if (e.target.files.length > 0) {
-            setFile(e.target.files[0]);
-            setStatus('idle');
-            setMessage('');
-        }
-    };
-
     const flashFirmware = async () => {
-        if (!file) return;
-
         setStatus('flashing');
-        setMessage('Starting upload...');
+        setMessage('Downloading firmware...');
         setProgress(0);
 
-        const fileReader = new FileReader();
+        try {
+            // Fetch bundled firmware from public folder
+            const response = await fetch('/firmware.hex');
+            if (!response.ok) {
+                throw new Error('Firmware file not found. Please ensure firmware.hex is in the public folder.');
+            }
+            const arrayBuffer = await response.arrayBuffer();
+            const fileBuffer = Buffer.from(arrayBuffer);
 
-        fileReader.onload = async (event) => {
-            const fileBuffer = Buffer.from(event.target.result);
+            setMessage('Flashing firmware...');
 
             const avrgirl = new AvrgirlArduino({
                 board: 'mega',
@@ -44,9 +39,12 @@ const FirmwareUploader = () => {
                     setProgress(100);
                 }
             });
-        };
 
-        fileReader.readAsArrayBuffer(file);
+        } catch (err) {
+            console.error(err);
+            setStatus('error');
+            setMessage(`Error: ${err.message}`);
+        }
     };
 
     return (
@@ -54,23 +52,10 @@ const FirmwareUploader = () => {
             <h2 className="text-xl font-bold text-white mb-4">Firmware Update</h2>
 
             <div className="space-y-4">
-                <div>
-                    <label className="block text-sm font-medium text-gray-400 mb-2">
-                        Select Firmware (.hex)
-                    </label>
-                    <input
-                        type="file"
-                        accept=".hex"
-                        onChange={handleFileChange}
-                        className="block w-full text-sm text-gray-400
-                            file:mr-4 file:py-2 file:px-4
-                            file:rounded-md file:border-0
-                            file:text-sm file:font-semibold
-                            file:bg-blue-600 file:text-white
-                            hover:file:bg-blue-700
-                            cursor-pointer"
-                    />
-                </div>
+                <p className="text-gray-400 text-sm">
+                    Click the button below to update your Arduino with the latest bundled firmware.
+                    Make sure the device is plugged in but <strong>not connected</strong> above.
+                </p>
 
                 {status === 'flashing' && (
                     <div className="w-full bg-gray-700 rounded-full h-2.5">
@@ -78,7 +63,7 @@ const FirmwareUploader = () => {
                             className="bg-blue-600 h-2.5 rounded-full transition-all duration-300"
                             style={{ width: '100%' }} // Indeterminate for now
                         ></div>
-                        <p className="text-xs text-center text-gray-400 mt-1">Flashing... please wait</p>
+                        <p className="text-xs text-center text-gray-400 mt-1">Processing... please wait</p>
                     </div>
                 )}
 
@@ -93,13 +78,13 @@ const FirmwareUploader = () => {
 
                 <button
                     onClick={flashFirmware}
-                    disabled={!file || status === 'flashing'}
-                    className={`w-full py-2 px-4 rounded-md font-medium transition-colors ${!file || status === 'flashing'
+                    disabled={status === 'flashing'}
+                    className={`w-full py-2 px-4 rounded-md font-medium transition-colors ${status === 'flashing'
                             ? 'bg-gray-600 text-gray-400 cursor-not-allowed'
                             : 'bg-blue-600 text-white hover:bg-blue-700'
                         }`}
                 >
-                    {status === 'flashing' ? 'Flashing...' : 'Flash to Arduino'}
+                    {status === 'flashing' ? 'Updating...' : 'Update Firmware'}
                 </button>
             </div>
         </div>
