@@ -20,6 +20,9 @@ build/
 *.hex
 *.bin
 
+# Allow firmware hex in public folder
+!frontend/public/*.hex
+
 # IDE
 .DS_Store
 .idea/
