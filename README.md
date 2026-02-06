@@ -155,6 +155,42 @@ npm run build
 
 The production build will be in the `dist/` directory.
 
+### Deploying to Vercel
+
+#### Option 1: Deploy via Vercel CLI
+
+```bash
+# Install Vercel CLI globally
+npm install -g vercel
+
+# Navigate to web app directory
+cd AS7341-WebApp
+
+# Deploy
+vercel
+```
+
+#### Option 2: Deploy via GitHub Integration
+
+1. Push your code to GitHub (already done)
+2. Go to [vercel.com](https://vercel.com) and sign in
+3. Click "Add New Project"
+4. Import your `AS7341` repository
+5. Configure build settings:
+   - **Framework Preset**: Vite
+   - **Root Directory**: `AS7341-WebApp`
+   - **Build Command**: `npm run build`
+   - **Output Directory**: `dist`
+6. Click "Deploy"
+
+Your app will be live at `https://your-project.vercel.app`
+
+**Important Notes for Web Serial API:**
+- Web Serial API requires a secure context (HTTPS)
+- Vercel automatically provides HTTPS for all deployments
+- The browser will prompt for device permissions on first connection
+- Users must use a Chromium-based browser (Chrome, Edge, Opera)
+
 ### Technologies Used
 - **Frontend**: React 18, Vite, TailwindCSS
 - **Visualization**: Chart.js
