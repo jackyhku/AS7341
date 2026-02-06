@@ -47,7 +47,7 @@ Real-time visualization system for the AS7341 11-channel multispectral color sen
 
 ```bash
 # Navigate to Arduino project
-cd AS7341
+cd arduino
 
 # Using PlatformIO CLI
 pio run --target upload
@@ -64,7 +64,7 @@ pio run --target upload
 
 ```bash
 # Navigate to web app directory
-cd AS7341-WebApp
+cd frontend
 
 # Install dependencies
 npm install
@@ -79,7 +79,7 @@ The application will be available at `http://localhost:5173`
 
 1. **Upload Arduino Firmware**: Flash the firmware to your Arduino Mega 2560
 2. **Connect Hardware**: Connect the AS7341 sensor to the Arduino via I2C
-3. **Start Web Application**: Run `npm run dev` in the AS7341-WebApp directory
+3. **Start Web Application**: Run `npm run dev` in the frontend directory
 4. **Connect to Sensor**:
    - Click "Connect" button in the web interface
    - Select the Arduino's COM port from the browser dialog
@@ -95,12 +95,12 @@ After the first successful connection, the web app remembers your device. Simply
 ## 📁 Project Structure
 
 ```
-AS7341/                          # Arduino firmware project
+arduino/                         # Arduino firmware project
 ├── platformio.ini              # PlatformIO configuration
 └── src/
     └── main.cpp                # Arduino firmware with oversampling
 
-AS7341-WebApp/                   # React-based web application
+frontend/                        # React-based web application
 ├── package.json
 ├── vite.config.js
 ├── tailwind.config.js
@@ -149,7 +149,7 @@ The AS7341 sensor provides 11 discrete spectral channels:
 ### Building for Production
 
 ```bash
-cd AS7341-WebApp
+cd frontend
 npm run build
 ```
 
@@ -164,7 +164,7 @@ The production build will be in the `dist/` directory.
 npm install -g vercel
 
 # Navigate to web app directory
-cd AS7341-WebApp
+cd frontend
 
 # Deploy
 vercel
@@ -178,7 +178,7 @@ vercel
 4. Import your `AS7341` repository
 5. Configure build settings:
    - **Framework Preset**: Vite
-   - **Root Directory**: `AS7341-WebApp`
+   - **Root Directory**: `frontend`
    - **Build Command**: `npm run build`
    - **Output Directory**: `dist`
 6. Click "Deploy"
