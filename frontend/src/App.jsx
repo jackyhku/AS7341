@@ -4,7 +4,6 @@ import Chart from './components/Chart';
 import DataTable from './components/DataTable';
 import ControlPanel from './components/ControlPanel';
 import SpectrumChart from './components/SpectrumChart';
-import FirmwareUploader from './components/FirmwareUploader';
 
 export default function App() {
   const [isConnected, setIsConnected] = useState(false);
@@ -296,9 +295,6 @@ export default function App() {
         {!isConnected && (
           <div className="text-center py-12">
             <p className="text-gray-400 mb-4">Click "Connect to Serial" to start</p>
-            <div className="max-w-md mx-auto mt-8">
-              <FirmwareUploader />
-            </div>
           </div>
         )}
       </div>
