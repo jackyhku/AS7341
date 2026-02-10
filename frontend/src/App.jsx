@@ -4,6 +4,7 @@ import Chart from './components/Chart';
 import DataTable from './components/DataTable';
 import ControlPanel from './components/ControlPanel';
 import SpectrumChart from './components/SpectrumChart';
+import TeachableMachine from './components/TeachableMachine';
 
 export default function App() {
   const [isConnected, setIsConnected] = useState(false);
@@ -12,6 +13,8 @@ export default function App() {
   const [timePoints, setTimePoints] = useState([]);
   const [error, setError] = useState('');
   const [sampleRate, setSampleRate] = useState(1); // Default 1 Hz
+  const [activeTab, setActiveTab] = useState('visualizer'); // 'visualizer' or 'classifier'
+
   const serialRef = useRef(null);
   const dataBufferRef = useRef({
     '410nm': [],
@@ -30,18 +33,26 @@ export default function App() {
   const timeBufferRef = useRef([]);
   const startTimeRef = useRef(null);
 
+  const isConnectingRef = useRef(false);
+
   useEffect(() => {
     serialRef.current = new SerialConnection();
 
     // Try to auto-reconnect to previously connected port
     const tryAutoReconnect = async () => {
+      // Prevent double calls (React Strict Mode)
+      if (isConnectingRef.current) return;
+
       const savedPortInfo = SerialConnection.getSavedPortInfo();
       if (!savedPortInfo) return;
+
+      isConnectingRef.current = true;
 
       try {
         const ports = await serialRef.current.getPreviousPorts();
         if (ports.length === 0) {
           SerialConnection.clearSavedPort();
+          isConnectingRef.current = false;
           return;
         }
 
@@ -70,13 +81,19 @@ export default function App() {
         }
       } catch (err) {
         console.error('Error during auto-reconnect:', err);
-        SerialConnection.clearSavedPort();
+        // Only clear if it's not an "already open" error which might happen if race condition persists
+        if (err.name !== 'InvalidStateError') {
+          SerialConnection.clearSavedPort();
+        }
+      } finally {
+        isConnectingRef.current = false;
       }
     };
 
     tryAutoReconnect();
 
     return () => {
+      // Only disconnect if we are actually connected to avoid interfering with pending connection
       if (serialRef.current?.isConnected) {
         // Call async disconnect but don't await in cleanup
         serialRef.current.disconnect().catch(err => {
@@ -87,14 +104,20 @@ export default function App() {
   }, []);
 
   const handleConnect = async () => {
+    if (isConnectingRef.current) return;
+    isConnectingRef.current = true;
     try {
       setError('');
       const portSelected = await serialRef.current.selectPort();
-      if (!portSelected) return;
+      if (!portSelected) {
+        isConnectingRef.current = false;
+        return;
+      }
 
       const connected = await serialRef.current.connect();
       if (!connected) {
         setError('Failed to connect to port');
+        isConnectingRef.current = false;
         return;
       }
 
@@ -103,6 +126,8 @@ export default function App() {
       setIsConnected(true);
     } catch (err) {
       setError(err.message);
+    } finally {
+      isConnectingRef.current = false;
     }
   };
 
@@ -126,7 +151,10 @@ export default function App() {
       return;
     }
 
-    setData(newData);
+    // Add unique ID to data packet to help downstream components (TeachableMachine) 
+    // detect distinct samples vs re-renders
+    const dataWithId = { ...newData, id: Date.now() + Math.random() };
+    setData(dataWithId);
 
     if (newData.channels) {
       // Always keep last 60 samples (rolling/cycling buffer)
@@ -244,14 +272,38 @@ export default function App() {
             <button
               onClick={isConnected ? handleDisconnect : handleConnect}
               className={`px-6 py-2 rounded-lg font-semibold transition-colors whitespace-nowrap ${isConnected
-                  ? 'bg-red-600 hover:bg-red-700 text-white'
-                  : 'bg-blue-600 hover:bg-blue-700 text-white'
+                ? 'bg-red-600 hover:bg-red-700 text-white'
+                : 'bg-blue-600 hover:bg-blue-700 text-white'
                 }`}
             >
               {isConnected ? 'Disconnect' : 'Connect'}
             </button>
           </div>
         </div>
+
+        {/* Navigation Tabs */}
+        {isConnected && (
+          <div className="flex space-x-4 mb-6 border-b border-gray-700">
+            <button
+              onClick={() => setActiveTab('visualizer')}
+              className={`pb-2 px-4 transition-colors font-medium border-b-2 ${activeTab === 'visualizer'
+                ? 'border-blue-500 text-blue-400'
+                : 'border-transparent text-gray-400 hover:text-gray-200'
+                }`}
+            >
+              Visualizer
+            </button>
+            <button
+              onClick={() => setActiveTab('classifier')}
+              className={`pb-2 px-4 transition-colors font-medium border-b-2 ${activeTab === 'classifier'
+                ? 'border-blue-500 text-blue-400'
+                : 'border-transparent text-gray-400 hover:text-gray-200'
+                }`}
+            >
+              Teachable Machine
+            </button>
+          </div>
+        )}
 
         {/* Error Display */}
         {error && (
@@ -260,39 +312,45 @@ export default function App() {
           </div>
         )}
 
-        {isConnected && (
+        {isConnected ? (
           <>
-            {/* Control Panel */}
-            <ControlPanel
-              onSendCommand={sendLEDCommand}
-              onSampleRateChange={handleSampleRateChange}
-            />
-
-            {/* Main Content Grid */}
+            {/* Control Panel (Always visible for LED controls) */}
             <div className="mb-6">
-              {/* Current Values */}
-              <div className="bg-gray-800 border border-gray-700 rounded-lg p-6">
-                <h2 className="text-2xl font-bold mb-4">Current Values</h2>
-                <DataTable data={data?.channels} />
-              </div>
+              <ControlPanel
+                onSendCommand={sendLEDCommand}
+                onSampleRateChange={handleSampleRateChange}
+              />
             </div>
 
-            {/* Spectrum Chart */}
-            <div className="mb-6">
-              <SpectrumChart data={data} />
-            </div>
+            {activeTab === 'visualizer' ? (
+              <>
+                {/* Main Content Grid */}
+                <div className="mb-6">
+                  {/* Current Values */}
+                  <div className="bg-gray-800 border border-gray-700 rounded-lg p-6">
+                    <h2 className="text-2xl font-bold mb-4">Current Values</h2>
+                    <DataTable data={data?.channels} />
+                  </div>
+                </div>
 
-            {/* Chart */}
-            {timePoints.length > 0 && (
-              <div className="bg-gray-800 border border-gray-700 rounded-lg p-6 mb-6">
-                <h2 className="text-2xl font-bold mb-4">Sensor Data Over Time</h2>
-                <Chart data={chartData} timePoints={timePoints} />
-              </div>
+                {/* Spectrum Chart */}
+                <div className="mb-6">
+                  <SpectrumChart data={data} />
+                </div>
+
+                {/* Chart */}
+                {timePoints.length > 0 && (
+                  <div className="bg-gray-800 border border-gray-700 rounded-lg p-6 mb-6">
+                    <h2 className="text-2xl font-bold mb-4">Sensor Data Over Time</h2>
+                    <Chart data={chartData} timePoints={timePoints} />
+                  </div>
+                )}
+              </>
+            ) : (
+              <TeachableMachine sensorData={data} />
             )}
           </>
-        )}
-
-        {!isConnected && (
+        ) : (
           <div className="text-center py-12">
             <p className="text-gray-400 mb-4">Click "Connect to Serial" to start</p>
           </div>
