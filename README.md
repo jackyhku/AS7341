@@ -133,6 +133,15 @@ arduino/                         # Arduino firmware project
 └── src/
     └── main.cpp                # Arduino firmware with oversampling
 
+arduino-tensor/                  # Arduino firmware with TinyML
+├── platformio.ini              # PlatformIO configuration
+├── model123/                   # Trained model files
+└── src/
+    ├── main.cpp                # Inference logic
+    ├── NeuralNetwork.h         # Neural network implementation
+    └── model_data.h            # Exported model weights
+
+
 frontend/                        # React-based web application
 ├── package.json
 ├── vite.config.js
