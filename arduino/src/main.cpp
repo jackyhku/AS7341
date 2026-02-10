@@ -14,7 +14,7 @@ volatile bool sensorReady = false;
 
 // Sample rate control (in ms between readings)
 // Supported rates: 0.25Hz(4000ms), 0.5Hz(2000ms), 1Hz(1000ms), 2Hz(500ms), 4Hz(250ms), 8Hz(125ms)
-unsigned long sampleIntervalMs = 1000; // Default 1 Hz
+unsigned long sampleIntervalMs = 250; // Default 4 Hz
 
 // Interrupt Service Routine (ISR)
 void sensorInterrupt() {

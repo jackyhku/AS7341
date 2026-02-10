@@ -12,7 +12,7 @@ export default function App() {
   const [chartData, setChartData] = useState({});
   const [timePoints, setTimePoints] = useState([]);
   const [error, setError] = useState('');
-  const [sampleRate, setSampleRate] = useState(1); // Default 1 Hz
+  const [sampleRate, setSampleRate] = useState(4); // Default 4 Hz
   const [activeTab, setActiveTab] = useState('visualizer'); // 'visualizer' or 'classifier'
 
   const serialRef = useRef(null);

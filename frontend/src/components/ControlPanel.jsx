@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 export default function ControlPanel({ onSendCommand, onSampleRateChange }) {
   const [feedback, setFeedback] = useState('');
-  const [sampleRate, setSampleRate] = useState(1);
+  const [sampleRate, setSampleRate] = useState(4);
 
   const handleLEDCommand = (command) => {
     onSendCommand(command);
