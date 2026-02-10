@@ -16,12 +16,32 @@ Real-time visualization system for the AS7341 11-channel multispectral color sen
 - **Web Firmware Flasher**: Flash Arduino firmware directly from the browser (no external tools required)
 - **Modern UI**: Clean, dark-themed interface built with React and TailwindCSS
 
-### Arduino Firmware
-- **Multi-Rate Sampling**: Synchronized sample rate control (0.25-8 Hz)
-- **Oversampling**: Takes 5 readings per transmission and averages them for reduced noise
-- **JSON Communication Protocol**: Structured data format for reliability
-- **Memory-Safe**: Uses char arrays instead of String objects to prevent heap fragmentation
-- **Status Reporting**: Informative error and status messages
+### AI & Machine Learning
+- **Teachable Machine**: Train a neural network right in your browser to classify colors/objects.
+- **Real-time Inference**: Fast, client-side classification (running at 60fps+).
+- **Data Normalization**: Automatic L2 normalization to handle varying light intensities.
+- **Model Persistence**: Import/Export your trained models as a single `.zip` file.
+- **Visual Architecture**: Interactive visualization of the neural network structure.
+
+## 🧠 Teachable Machine
+
+This project includes a built-in "Teachable Machine" interface powered by TensorFlow.js.
+
+### How it Works
+1.  **Collect Data**: Record samples for different classes (e.g., "Apple", "Banana", "Orange").
+2.  **Train**: The app trains a lightweight Neural Network in your browser.
+3.  **Inference**: The model runs in real-time to predict the class of the current sensor reading.
+
+### Model Architecture
+The underlying model is a fully connected Feed-Forward Neural Network:
+
+![Model Architecture](docs/model_architecture.svg)
+
+-   **Input Layer**: 12 neurons (11 spectral channels + Clear)
+-   **Hidden Layer**: 16 neurons (ReLU activation)
+-   **Output Layer**: Softmax probability distribution (N classes)
+
+---
 
 ## 📋 Hardware Requirements
 

@@ -4,6 +4,7 @@ import JSZip from 'jszip';
 import ClassCard from './ClassCard';
 import TrainingStats from './TrainingStats';
 import InferenceDisplay from './InferenceDisplay';
+import ModelArchitecture from './ModelArchitecture';
 
 const CHANNELS = [
     '410nm', '440nm', '470nm', '510nm', '550nm', '580nm',
@@ -408,6 +409,8 @@ export default function TeachableMachine({ sensorData }) {
                 {/* Right Column: Training & Inference */}
                 <div className="space-y-6">
                     <TrainingStats logs={trainingLogs} />
+
+                    <ModelArchitecture classes={classes} />
 
                     {model && (
                         <InferenceDisplay
