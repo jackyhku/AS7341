@@ -1,82 +1,327 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="600" height="400" viewBox="0 0 600 400" style="background-color: #111827; border-radius: 8px;">
-    <defs>
-        <marker id="arrow" markerWidth="6" markerHeight="6" refX="10" refY="3" orient="auto" markerUnits="strokeWidth">
-            <path d="M0,0 L0,6 L9,3 z" fill="#4b5563" />
-        </marker>
-    </defs>
-    
-    <!-- Title -->
-    <text x="30" y="30" fill="white" font-family="sans-serif" font-size="20" font-weight="bold">Model Architecture (12-16-N)</text>
-
-    <!-- Connections: Input -> Hidden -->
-    <g opacity="0.2">
-        <line x1="90" y1="50" x2="300" y2="50" stroke="#4b5563" stroke-width="1" />
-        <line x1="90" y1="50" x2="300" y2="350" stroke="#4b5563" stroke-width="1" />
-        <line x1="90" y1="350" x2="300" y2="50" stroke="#4b5563" stroke-width="1" />
-        <line x1="90" y1="350" x2="300" y2="350" stroke="#4b5563" stroke-width="1" />
-        <!-- Simplified mess of connections for visual effect -->
-        <path d="M90,50 L300,150 M90,80 L300,100 M90,300 L300,200" stroke="#4b5563" stroke-width="1" />
-    </g>
-
-    <!-- Connections: Hidden -> Output -->
-    <g opacity="0.4">
-        <line x1="300" y1="50" x2="510" y2="100" stroke="#60a5fa" stroke-width="1.5" />
-        <line x1="300" y1="350" x2="510" y2="300" stroke="#60a5fa" stroke-width="1.5" />
-        <line x1="300" y1="200" x2="510" y2="200" stroke="#60a5fa" stroke-width="1.5" />
-    </g>
-
-    <!-- Input Layer -->
-    <g>
-        <circle cx="90" cy="50" r="6" fill="#7600ed" stroke="#333" stroke-width="1" />
-        <text x="75" y="54" text-anchor="end" fill="#9ca3af" font-size="10" font-family="monospace">410nm</text>
-        <circle cx="90" cy="77" r="6" fill="#0028ff" stroke="#333" stroke-width="1" />
-        <circle cx="90" cy="104" r="6" fill="#00d5ff" stroke="#333" stroke-width="1" />
-        <circle cx="90" cy="131" r="6" fill="#1aff00" stroke="#333" stroke-width="1" />
-        <circle cx="90" cy="158" r="6" fill="#bfff00" stroke="#333" stroke-width="1" />
-        <circle cx="90" cy="185" r="6" fill="#ffdf00" stroke="#333" stroke-width="1" />
-        <circle cx="90" cy="212" r="6" fill="#ff7b00" stroke="#333" stroke-width="1" />
-        <circle cx="90" cy="239" r="6" fill="#ff0000" stroke="#333" stroke-width="1" />
-        <circle cx="90" cy="266" r="6" fill="#9e0000" stroke="#333" stroke-width="1" />
-        <circle cx="90" cy="293" r="6" fill="#570000" stroke="#333" stroke-width="1" />
-        <circle cx="90" cy="320" r="6" fill="#3d0000" stroke="#333" stroke-width="1" />
-        <circle cx="90" cy="347" r="6" fill="#ffffff" stroke="#333" stroke-width="1" />
-        <text x="75" y="351" text-anchor="end" fill="#9ca3af" font-size="10" font-family="monospace">Clear</text>
-    </g>
-    <text x="90" y="390" text-anchor="middle" fill="#6b7280" font-size="12">Input Layer (12)</text>
-
-    <!-- Hidden Layer -->
-    <g>
-        <circle cx="300" cy="50" r="5" fill="#10b981" />
-        <circle cx="300" cy="70" r="5" fill="#10b981" />
-        <circle cx="300" cy="90" r="5" fill="#10b981" />
-        <circle cx="300" cy="110" r="5" fill="#10b981" />
-        <circle cx="300" cy="130" r="5" fill="#10b981" />
-        <circle cx="300" cy="150" r="5" fill="#10b981" />
-        <circle cx="300" cy="170" r="5" fill="#10b981" />
-        <circle cx="300" cy="190" r="5" fill="#10b981" />
-        <circle cx="300" cy="210" r="5" fill="#10b981" />
-        <circle cx="300" cy="230" r="5" fill="#10b981" />
-        <circle cx="300" cy="250" r="5" fill="#10b981" />
-        <circle cx="300" cy="270" r="5" fill="#10b981" />
-        <circle cx="300" cy="290" r="5" fill="#10b981" />
-        <circle cx="300" cy="310" r="5" fill="#10b981" />
-        <circle cx="300" cy="330" r="5" fill="#10b981" />
-        <circle cx="300" cy="350" r="5" fill="#10b981" />
-    </g>
-    <text x="300" y="30" text-anchor="middle" fill="#10b981" font-size="12" font-weight="bold">Dense (ReLU, 16)</text>
-    <text x="300" y="390" text-anchor="middle" fill="#6b7280" font-size="12">Hidden Layer (16)</text>
-
-    <!-- Output Layer -->
-    <g>
-        <circle cx="510" cy="100" r="8" fill="#3b82f6" />
-        <text x="525" y="104" text-anchor="start" fill="white" font-size="12" font-weight="bold">Class A</text>
-        
-        <circle cx="510" cy="200" r="8" fill="#3b82f6" />
-        <text x="525" y="204" text-anchor="start" fill="white" font-size="12" font-weight="bold">Class B</text>
-
-        <circle cx="510" cy="300" r="8" fill="#3b82f6" />
-        <text x="525" y="304" text-anchor="start" fill="white" font-size="12" font-weight="bold">Class C</text>
-    </g>
-    <text x="510" y="30" text-anchor="middle" fill="#3b82f6" font-size="12" font-weight="bold">Output (Softmax)</text>
-    <text x="510" y="390" text-anchor="middle" fill="#6b7280" font-size="12">Output Layer (3+)</text>
+<svg width="800" height="600" xmlns="http://www.w3.org/2000/svg" style="background-color:white">
+<line x1="150" y1="105.0" x2="400" y2="35.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="105.0" x2="400" y2="70.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="105.0" x2="400" y2="105.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="105.0" x2="400" y2="140.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="105.0" x2="400" y2="175.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="105.0" x2="400" y2="210.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="105.0" x2="400" y2="245.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="105.0" x2="400" y2="280.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="105.0" x2="400" y2="315.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="105.0" x2="400" y2="350.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="105.0" x2="400" y2="385.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="105.0" x2="400" y2="420.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="105.0" x2="400" y2="455.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="105.0" x2="400" y2="490.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="105.0" x2="400" y2="525.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="105.0" x2="400" y2="560.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="140.0" x2="400" y2="35.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="140.0" x2="400" y2="70.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="140.0" x2="400" y2="105.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="140.0" x2="400" y2="140.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="140.0" x2="400" y2="175.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="140.0" x2="400" y2="210.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="140.0" x2="400" y2="245.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="140.0" x2="400" y2="280.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="140.0" x2="400" y2="315.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="140.0" x2="400" y2="350.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="140.0" x2="400" y2="385.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="140.0" x2="400" y2="420.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="140.0" x2="400" y2="455.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="140.0" x2="400" y2="490.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="140.0" x2="400" y2="525.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="140.0" x2="400" y2="560.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="175.0" x2="400" y2="35.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="175.0" x2="400" y2="70.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="175.0" x2="400" y2="105.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="175.0" x2="400" y2="140.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="175.0" x2="400" y2="175.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="175.0" x2="400" y2="210.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="175.0" x2="400" y2="245.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="175.0" x2="400" y2="280.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="175.0" x2="400" y2="315.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="175.0" x2="400" y2="350.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="175.0" x2="400" y2="385.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="175.0" x2="400" y2="420.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="175.0" x2="400" y2="455.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="175.0" x2="400" y2="490.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="175.0" x2="400" y2="525.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="175.0" x2="400" y2="560.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="210.0" x2="400" y2="35.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="210.0" x2="400" y2="70.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="210.0" x2="400" y2="105.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="210.0" x2="400" y2="140.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="210.0" x2="400" y2="175.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="210.0" x2="400" y2="210.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="210.0" x2="400" y2="245.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="210.0" x2="400" y2="280.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="210.0" x2="400" y2="315.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="210.0" x2="400" y2="350.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="210.0" x2="400" y2="385.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="210.0" x2="400" y2="420.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="210.0" x2="400" y2="455.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="210.0" x2="400" y2="490.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="210.0" x2="400" y2="525.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="210.0" x2="400" y2="560.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="245.0" x2="400" y2="35.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="245.0" x2="400" y2="70.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="245.0" x2="400" y2="105.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="245.0" x2="400" y2="140.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="245.0" x2="400" y2="175.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="245.0" x2="400" y2="210.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="245.0" x2="400" y2="245.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="245.0" x2="400" y2="280.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="245.0" x2="400" y2="315.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="245.0" x2="400" y2="350.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="245.0" x2="400" y2="385.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="245.0" x2="400" y2="420.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="245.0" x2="400" y2="455.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="245.0" x2="400" y2="490.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="245.0" x2="400" y2="525.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="245.0" x2="400" y2="560.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="280.0" x2="400" y2="35.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="280.0" x2="400" y2="70.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="280.0" x2="400" y2="105.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="280.0" x2="400" y2="140.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="280.0" x2="400" y2="175.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="280.0" x2="400" y2="210.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="280.0" x2="400" y2="245.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="280.0" x2="400" y2="280.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="280.0" x2="400" y2="315.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="280.0" x2="400" y2="350.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="280.0" x2="400" y2="385.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="280.0" x2="400" y2="420.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="280.0" x2="400" y2="455.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="280.0" x2="400" y2="490.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="280.0" x2="400" y2="525.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="280.0" x2="400" y2="560.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="315.0" x2="400" y2="35.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="315.0" x2="400" y2="70.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="315.0" x2="400" y2="105.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="315.0" x2="400" y2="140.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="315.0" x2="400" y2="175.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="315.0" x2="400" y2="210.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="315.0" x2="400" y2="245.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="315.0" x2="400" y2="280.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="315.0" x2="400" y2="315.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="315.0" x2="400" y2="350.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="315.0" x2="400" y2="385.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="315.0" x2="400" y2="420.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="315.0" x2="400" y2="455.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="315.0" x2="400" y2="490.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="315.0" x2="400" y2="525.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="315.0" x2="400" y2="560.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="350.0" x2="400" y2="35.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="350.0" x2="400" y2="70.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="350.0" x2="400" y2="105.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="350.0" x2="400" y2="140.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="350.0" x2="400" y2="175.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="350.0" x2="400" y2="210.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="350.0" x2="400" y2="245.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="350.0" x2="400" y2="280.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="350.0" x2="400" y2="315.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="350.0" x2="400" y2="350.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="350.0" x2="400" y2="385.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="350.0" x2="400" y2="420.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="350.0" x2="400" y2="455.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="350.0" x2="400" y2="490.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="350.0" x2="400" y2="525.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="350.0" x2="400" y2="560.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="385.0" x2="400" y2="35.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="385.0" x2="400" y2="70.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="385.0" x2="400" y2="105.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="385.0" x2="400" y2="140.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="385.0" x2="400" y2="175.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="385.0" x2="400" y2="210.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="385.0" x2="400" y2="245.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="385.0" x2="400" y2="280.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="385.0" x2="400" y2="315.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="385.0" x2="400" y2="350.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="385.0" x2="400" y2="385.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="385.0" x2="400" y2="420.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="385.0" x2="400" y2="455.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="385.0" x2="400" y2="490.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="385.0" x2="400" y2="525.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="385.0" x2="400" y2="560.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="420.0" x2="400" y2="35.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="420.0" x2="400" y2="70.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="420.0" x2="400" y2="105.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="420.0" x2="400" y2="140.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="420.0" x2="400" y2="175.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="420.0" x2="400" y2="210.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="420.0" x2="400" y2="245.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="420.0" x2="400" y2="280.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="420.0" x2="400" y2="315.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="420.0" x2="400" y2="350.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="420.0" x2="400" y2="385.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="420.0" x2="400" y2="420.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="420.0" x2="400" y2="455.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="420.0" x2="400" y2="490.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="420.0" x2="400" y2="525.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="420.0" x2="400" y2="560.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="455.0" x2="400" y2="35.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="455.0" x2="400" y2="70.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="455.0" x2="400" y2="105.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="455.0" x2="400" y2="140.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="455.0" x2="400" y2="175.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="455.0" x2="400" y2="210.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="455.0" x2="400" y2="245.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="455.0" x2="400" y2="280.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="455.0" x2="400" y2="315.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="455.0" x2="400" y2="350.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="455.0" x2="400" y2="385.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="455.0" x2="400" y2="420.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="455.0" x2="400" y2="455.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="455.0" x2="400" y2="490.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="455.0" x2="400" y2="525.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="455.0" x2="400" y2="560.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="490.0" x2="400" y2="35.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="490.0" x2="400" y2="70.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="490.0" x2="400" y2="105.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="490.0" x2="400" y2="140.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="490.0" x2="400" y2="175.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="490.0" x2="400" y2="210.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="490.0" x2="400" y2="245.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="490.0" x2="400" y2="280.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="490.0" x2="400" y2="315.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="490.0" x2="400" y2="350.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="490.0" x2="400" y2="385.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="490.0" x2="400" y2="420.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="490.0" x2="400" y2="455.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="490.0" x2="400" y2="490.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="490.0" x2="400" y2="525.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="150" y1="490.0" x2="400" y2="560.0" stroke="#ecf0f1" stroke-width="1" />
+<line x1="400" y1="35.0" x2="650" y2="227.5" stroke="#ecf0f1" stroke-width="1" />
+<line x1="400" y1="35.0" x2="650" y2="262.5" stroke="#ecf0f1" stroke-width="1" />
+<line x1="400" y1="35.0" x2="650" y2="297.5" stroke="#ecf0f1" stroke-width="1" />
+<line x1="400" y1="35.0" x2="650" y2="332.5" stroke="#ecf0f1" stroke-width="1" />
+<line x1="400" y1="35.0" x2="650" y2="367.5" stroke="#ecf0f1" stroke-width="1" />
+<line x1="400" y1="70.0" x2="650" y2="227.5" stroke="#ecf0f1" stroke-width="1" />
+<line x1="400" y1="70.0" x2="650" y2="262.5" stroke="#ecf0f1" stroke-width="1" />
+<line x1="400" y1="70.0" x2="650" y2="297.5" stroke="#ecf0f1" stroke-width="1" />
+<line x1="400" y1="70.0" x2="650" y2="332.5" stroke="#ecf0f1" stroke-width="1" />
+<line x1="400" y1="70.0" x2="650" y2="367.5" stroke="#ecf0f1" stroke-width="1" />
+<line x1="400" y1="105.0" x2="650" y2="227.5" stroke="#ecf0f1" stroke-width="1" />
+<line x1="400" y1="105.0" x2="650" y2="262.5" stroke="#ecf0f1" stroke-width="1" />
+<line x1="400" y1="105.0" x2="650" y2="297.5" stroke="#ecf0f1" stroke-width="1" />
+<line x1="400" y1="105.0" x2="650" y2="332.5" stroke="#ecf0f1" stroke-width="1" />
+<line x1="400" y1="105.0" x2="650" y2="367.5" stroke="#ecf0f1" stroke-width="1" />
+<line x1="400" y1="140.0" x2="650" y2="227.5" stroke="#ecf0f1" stroke-width="1" />
+<line x1="400" y1="140.0" x2="650" y2="262.5" stroke="#ecf0f1" stroke-width="1" />
+<line x1="400" y1="140.0" x2="650" y2="297.5" stroke="#ecf0f1" stroke-width="1" />
+<line x1="400" y1="140.0" x2="650" y2="332.5" stroke="#ecf0f1" stroke-width="1" />
+<line x1="400" y1="140.0" x2="650" y2="367.5" stroke="#ecf0f1" stroke-width="1" />
+<line x1="400" y1="175.0" x2="650" y2="227.5" stroke="#ecf0f1" stroke-width="1" />
+<line x1="400" y1="175.0" x2="650" y2="262.5" stroke="#ecf0f1" stroke-width="1" />
+<line x1="400" y1="175.0" x2="650" y2="297.5" stroke="#ecf0f1" stroke-width="1" />
+<line x1="400" y1="175.0" x2="650" y2="332.5" stroke="#ecf0f1" stroke-width="1" />
+<line x1="400" y1="175.0" x2="650" y2="367.5" stroke="#ecf0f1" stroke-width="1" />
+<line x1="400" y1="210.0" x2="650" y2="227.5" stroke="#ecf0f1" stroke-width="1" />
+<line x1="400" y1="210.0" x2="650" y2="262.5" stroke="#ecf0f1" stroke-width="1" />
+<line x1="400" y1="210.0" x2="650" y2="297.5" stroke="#ecf0f1" stroke-width="1" />
+<line x1="400" y1="210.0" x2="650" y2="332.5" stroke="#ecf0f1" stroke-width="1" />
+<line x1="400" y1="210.0" x2="650" y2="367.5" stroke="#ecf0f1" stroke-width="1" />
+<line x1="400" y1="245.0" x2="650" y2="227.5" stroke="#ecf0f1" stroke-width="1" />
+<line x1="400" y1="245.0" x2="650" y2="262.5" stroke="#ecf0f1" stroke-width="1" />
+<line x1="400" y1="245.0" x2="650" y2="297.5" stroke="#ecf0f1" stroke-width="1" />
+<line x1="400" y1="245.0" x2="650" y2="332.5" stroke="#ecf0f1" stroke-width="1" />
+<line x1="400" y1="245.0" x2="650" y2="367.5" stroke="#ecf0f1" stroke-width="1" />
+<line x1="400" y1="280.0" x2="650" y2="227.5" stroke="#ecf0f1" stroke-width="1" />
+<line x1="400" y1="280.0" x2="650" y2="262.5" stroke="#ecf0f1" stroke-width="1" />
+<line x1="400" y1="280.0" x2="650" y2="297.5" stroke="#ecf0f1" stroke-width="1" />
+<line x1="400" y1="280.0" x2="650" y2="332.5" stroke="#ecf0f1" stroke-width="1" />
+<line x1="400" y1="280.0" x2="650" y2="367.5" stroke="#ecf0f1" stroke-width="1" />
+<line x1="400" y1="315.0" x2="650" y2="227.5" stroke="#ecf0f1" stroke-width="1" />
+<line x1="400" y1="315.0" x2="650" y2="262.5" stroke="#ecf0f1" stroke-width="1" />
+<line x1="400" y1="315.0" x2="650" y2="297.5" stroke="#ecf0f1" stroke-width="1" />
+<line x1="400" y1="315.0" x2="650" y2="332.5" stroke="#ecf0f1" stroke-width="1" />
+<line x1="400" y1="315.0" x2="650" y2="367.5" stroke="#ecf0f1" stroke-width="1" />
+<line x1="400" y1="350.0" x2="650" y2="227.5" stroke="#ecf0f1" stroke-width="1" />
+<line x1="400" y1="350.0" x2="650" y2="262.5" stroke="#ecf0f1" stroke-width="1" />
+<line x1="400" y1="350.0" x2="650" y2="297.5" stroke="#ecf0f1" stroke-width="1" />
+<line x1="400" y1="350.0" x2="650" y2="332.5" stroke="#ecf0f1" stroke-width="1" />
+<line x1="400" y1="350.0" x2="650" y2="367.5" stroke="#ecf0f1" stroke-width="1" />
+<line x1="400" y1="385.0" x2="650" y2="227.5" stroke="#ecf0f1" stroke-width="1" />
+<line x1="400" y1="385.0" x2="650" y2="262.5" stroke="#ecf0f1" stroke-width="1" />
+<line x1="400" y1="385.0" x2="650" y2="297.5" stroke="#ecf0f1" stroke-width="1" />
+<line x1="400" y1="385.0" x2="650" y2="332.5" stroke="#ecf0f1" stroke-width="1" />
+<line x1="400" y1="385.0" x2="650" y2="367.5" stroke="#ecf0f1" stroke-width="1" />
+<line x1="400" y1="420.0" x2="650" y2="227.5" stroke="#ecf0f1" stroke-width="1" />
+<line x1="400" y1="420.0" x2="650" y2="262.5" stroke="#ecf0f1" stroke-width="1" />
+<line x1="400" y1="420.0" x2="650" y2="297.5" stroke="#ecf0f1" stroke-width="1" />
+<line x1="400" y1="420.0" x2="650" y2="332.5" stroke="#ecf0f1" stroke-width="1" />
+<line x1="400" y1="420.0" x2="650" y2="367.5" stroke="#ecf0f1" stroke-width="1" />
+<line x1="400" y1="455.0" x2="650" y2="227.5" stroke="#ecf0f1" stroke-width="1" />
+<line x1="400" y1="455.0" x2="650" y2="262.5" stroke="#ecf0f1" stroke-width="1" />
+<line x1="400" y1="455.0" x2="650" y2="297.5" stroke="#ecf0f1" stroke-width="1" />
+<line x1="400" y1="455.0" x2="650" y2="332.5" stroke="#ecf0f1" stroke-width="1" />
+<line x1="400" y1="455.0" x2="650" y2="367.5" stroke="#ecf0f1" stroke-width="1" />
+<line x1="400" y1="490.0" x2="650" y2="227.5" stroke="#ecf0f1" stroke-width="1" />
+<line x1="400" y1="490.0" x2="650" y2="262.5" stroke="#ecf0f1" stroke-width="1" />
+<line x1="400" y1="490.0" x2="650" y2="297.5" stroke="#ecf0f1" stroke-width="1" />
+<line x1="400" y1="490.0" x2="650" y2="332.5" stroke="#ecf0f1" stroke-width="1" />
+<line x1="400" y1="490.0" x2="650" y2="367.5" stroke="#ecf0f1" stroke-width="1" />
+<line x1="400" y1="525.0" x2="650" y2="227.5" stroke="#ecf0f1" stroke-width="1" />
+<line x1="400" y1="525.0" x2="650" y2="262.5" stroke="#ecf0f1" stroke-width="1" />
+<line x1="400" y1="525.0" x2="650" y2="297.5" stroke="#ecf0f1" stroke-width="1" />
+<line x1="400" y1="525.0" x2="650" y2="332.5" stroke="#ecf0f1" stroke-width="1" />
+<line x1="400" y1="525.0" x2="650" y2="367.5" stroke="#ecf0f1" stroke-width="1" />
+<line x1="400" y1="560.0" x2="650" y2="227.5" stroke="#ecf0f1" stroke-width="1" />
+<line x1="400" y1="560.0" x2="650" y2="262.5" stroke="#ecf0f1" stroke-width="1" />
+<line x1="400" y1="560.0" x2="650" y2="297.5" stroke="#ecf0f1" stroke-width="1" />
+<line x1="400" y1="560.0" x2="650" y2="332.5" stroke="#ecf0f1" stroke-width="1" />
+<line x1="400" y1="560.0" x2="650" y2="367.5" stroke="#ecf0f1" stroke-width="1" />
+<text x="150" y="50.0" font-family="Arial" font-size="14" font-weight="bold" text-anchor="middle" fill="#2c3e50">Input Layer (12)</text>
+<circle cx="150" cy="90.0" r="15" fill="#3498db" stroke="#34495e" stroke-width="2" />
+<text x="125" y="95.0" font-family="Arial" font-size="12" text-anchor="end" fill="#2c3e50">410nm</text>
+<circle cx="150" cy="125.0" r="15" fill="#3498db" stroke="#34495e" stroke-width="2" />
+<text x="125" y="130.0" font-family="Arial" font-size="12" text-anchor="end" fill="#2c3e50">440nm</text>
+<circle cx="150" cy="160.0" r="15" fill="#3498db" stroke="#34495e" stroke-width="2" />
+<text x="125" y="165.0" font-family="Arial" font-size="12" text-anchor="end" fill="#2c3e50">470nm</text>
+<circle cx="150" cy="195.0" r="15" fill="#3498db" stroke="#34495e" stroke-width="2" />
+<text x="125" y="200.0" font-family="Arial" font-size="12" text-anchor="end" fill="#2c3e50">510nm</text>
+<circle cx="150" cy="230.0" r="15" fill="#3498db" stroke="#34495e" stroke-width="2" />
+<text x="125" y="235.0" font-family="Arial" font-size="12" text-anchor="end" fill="#2c3e50">550nm</text>
+<circle cx="150" cy="265.0" r="15" fill="#3498db" stroke="#34495e" stroke-width="2" />
+<text x="125" y="270.0" font-family="Arial" font-size="12" text-anchor="end" fill="#2c3e50">580nm</text>
+<circle cx="150" cy="300.0" r="15" fill="#3498db" stroke="#34495e" stroke-width="2" />
+<text x="125" y="305.0" font-family="Arial" font-size="12" text-anchor="end" fill="#2c3e50">610nm</text>
+<circle cx="150" cy="335.0" r="15" fill="#3498db" stroke="#34495e" stroke-width="2" />
+<text x="125" y="340.0" font-family="Arial" font-size="12" text-anchor="end" fill="#2c3e50">680nm</text>
+<circle cx="150" cy="370.0" r="15" fill="#3498db" stroke="#34495e" stroke-width="2" />
+<text x="125" y="375.0" font-family="Arial" font-size="12" text-anchor="end" fill="#2c3e50">730nm</text>
+<circle cx="150" cy="405.0" r="15" fill="#3498db" stroke="#34495e" stroke-width="2" />
+<text x="125" y="410.0" font-family="Arial" font-size="12" text-anchor="end" fill="#2c3e50">810nm</text>
+<circle cx="150" cy="440.0" r="15" fill="#3498db" stroke="#34495e" stroke-width="2" />
+<text x="125" y="445.0" font-family="Arial" font-size="12" text-anchor="end" fill="#2c3e50">860nm</text>
+<circle cx="150" cy="475.0" r="15" fill="#3498db" stroke="#34495e" stroke-width="2" />
+<text x="125" y="480.0" font-family="Arial" font-size="12" text-anchor="end" fill="#2c3e50">Clear</text>
+<text x="400" y="-20.0" font-family="Arial" font-size="14" font-weight="bold" text-anchor="middle" fill="#2c3e50">Hidden Layer (16)</text>
+<circle cx="400" cy="20.0" r="15" fill="#95a5a6" stroke="#34495e" stroke-width="2" />
+<circle cx="400" cy="55.0" r="15" fill="#95a5a6" stroke="#34495e" stroke-width="2" />
+<circle cx="400" cy="90.0" r="15" fill="#95a5a6" stroke="#34495e" stroke-width="2" />
+<circle cx="400" cy="125.0" r="15" fill="#95a5a6" stroke="#34495e" stroke-width="2" />
+<circle cx="400" cy="160.0" r="15" fill="#95a5a6" stroke="#34495e" stroke-width="2" />
+<circle cx="400" cy="195.0" r="15" fill="#95a5a6" stroke="#34495e" stroke-width="2" />
+<circle cx="400" cy="230.0" r="15" fill="#95a5a6" stroke="#34495e" stroke-width="2" />
+<circle cx="400" cy="265.0" r="15" fill="#95a5a6" stroke="#34495e" stroke-width="2" />
+<circle cx="400" cy="300.0" r="15" fill="#95a5a6" stroke="#34495e" stroke-width="2" />
+<circle cx="400" cy="335.0" r="15" fill="#95a5a6" stroke="#34495e" stroke-width="2" />
+<circle cx="400" cy="370.0" r="15" fill="#95a5a6" stroke="#34495e" stroke-width="2" />
+<circle cx="400" cy="405.0" r="15" fill="#95a5a6" stroke="#34495e" stroke-width="2" />
+<circle cx="400" cy="440.0" r="15" fill="#95a5a6" stroke="#34495e" stroke-width="2" />
+<circle cx="400" cy="475.0" r="15" fill="#95a5a6" stroke="#34495e" stroke-width="2" />
+<circle cx="400" cy="510.0" r="15" fill="#95a5a6" stroke="#34495e" stroke-width="2" />
+<circle cx="400" cy="545.0" r="15" fill="#95a5a6" stroke="#34495e" stroke-width="2" />
+<text x="650" y="172.5" font-family="Arial" font-size="14" font-weight="bold" text-anchor="middle" fill="#2c3e50">Output Layer (5)</text>
+<circle cx="650" cy="212.5" r="15" fill="#e74c3c" stroke="#34495e" stroke-width="2" />
+<text x="675" y="217.5" font-family="Arial" font-size="12" text-anchor="start" fill="#2c3e50">Red</text>
+<circle cx="650" cy="247.5" r="15" fill="#e74c3c" stroke="#34495e" stroke-width="2" />
+<text x="675" y="252.5" font-family="Arial" font-size="12" text-anchor="start" fill="#2c3e50">Yellow</text>
+<circle cx="650" cy="282.5" r="15" fill="#e74c3c" stroke="#34495e" stroke-width="2" />
+<text x="675" y="287.5" font-family="Arial" font-size="12" text-anchor="start" fill="#2c3e50">Green</text>
+<circle cx="650" cy="317.5" r="15" fill="#e74c3c" stroke="#34495e" stroke-width="2" />
+<text x="675" y="322.5" font-family="Arial" font-size="12" text-anchor="start" fill="#2c3e50">Blue</text>
+<circle cx="650" cy="352.5" r="15" fill="#e74c3c" stroke="#34495e" stroke-width="2" />
+<text x="675" y="357.5" font-family="Arial" font-size="12" text-anchor="start" fill="#2c3e50">Purple</text>
 </svg>
